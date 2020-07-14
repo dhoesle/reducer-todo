@@ -1,4 +1,3 @@
-import {v4 as uuid} from 'uuid'
 export const initialState = [
     {
         task: 'Learn about reducers',
@@ -9,19 +8,32 @@ export const initialState = [
 
 export const reducer = (state, action) => {
     switch (action.type) {  
-       case 'ADD_TODOS':
-           return [...state, {
+        case 'TOGGLE_COMPLETED':
+            return state.map(task => {
+                if(task.id === action.payload) {
+                    return{
+                        ...task,
+                        completed: !task.completed
+                    }
+                }else {
+                    return task;
+                }
+            })
+            // return [...state, {
+            //     completed: !state.completed
+            // }]
+            
+        case 'ADD_TODOS':
+            return [...state, {
                task: action.payload,
                completed: false,
                id: new Date()
-           },]
-        case 'TOGGLE_COMPLETED':
-           return [...state, {
-               completed: true
-           }]
+            },]
+        case 'CLEAR_TODOS':
+            return state.filter(state => !state.completed)
             
         default: 
-        return state
+            return state
     }
     
 }
