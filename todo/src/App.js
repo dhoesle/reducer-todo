@@ -1,6 +1,6 @@
 import React from 'react';
-import TodoList from './components/TodoList'
-import TodoForm from './components/TodoForm'
+import Todo from './components/TodoList'
+
 import './App.css';
 
 function App() {
@@ -9,14 +9,9 @@ function App() {
       <div className='Header'>
         <h2>Welcome to your Todo App!</h2>
       </div>
-      <TodoList
-        // todos={this.state.todos}
-        // toggleTodo={this.toggleTodo}
-        // clearPurchased={this.clearPurchased}
-      />
-      <TodoForm 
-        // addTodo={this.addTodo}
-      />
+      <Todo />
+    
+     
     </div>
   );
 }
