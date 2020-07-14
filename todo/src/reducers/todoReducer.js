@@ -10,12 +10,18 @@ export const initialState = [
 export const reducer = (state, action) => {
     switch (action.type) {  
        case 'ADD_TODOS':
-           return [...initialState, {
+           return [...state, {
                task: action.payload,
                completed: false,
                id: new Date()
+           },]
+        case 'TOGGLE_COMPLETED':
+           return [...state, {
+               completed: true
            }]
+            
         default: 
-           return state
+        return state
     }
+    
 }

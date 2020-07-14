@@ -1,6 +1,5 @@
 import React, { useState, useReducer} from 'react';
 import { initialState, reducer } from '../reducers/todoReducer'
-import Todo from './Todo'
 
 const TodoList = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -17,16 +16,17 @@ const TodoList = () => {
     return (
         <div className='todo-list'>
             {state.map(item => (
-                <Todo
-                    key={item.id}
-                    todo={item}
-                    toggleTodo={state.toggleTodo}
-                />
+                    <div
+                        className={`todo${item.completed ? ' completed' : ''}`}
+                        onClick={() => dispatch({ type: 'TOGGLE_COMPLETED'})}
+                    >
+                        <p>{item.task}</p>
+                    </div>
             ))}
             <form onSubmit={handleSubmit}>
                 <input 
                     type='text' 
-                    name='item' 
+                    name='task' 
                     value={newTodoText} 
                     onChange={handleChanges}
                 />

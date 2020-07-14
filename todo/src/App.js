@@ -6,17 +6,6 @@ import TodoList from './components/TodoList';
 
 function App() {
 
-  const addTodo = (event, todo) => {
-    event.preventDefault();
-    const newTodo = {
-      task: todo,
-      id: Date.now(),
-      completed: false
-    }
-    this.setState({
-      todos: [...this.state.todos, newTodo]
-    })
-  }
 
   return (
     <div className='App'>
