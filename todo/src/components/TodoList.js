@@ -19,10 +19,6 @@ const TodoList = () => {
         dispatch({ type: 'ADD_TODOS', payload: newTodoText})
     }
 
-    const toggleCompleted = (taskId) => {
-        dispatch({ type: 'TOGGLE_COMPLETED', payload: taskId })
-    }
-
     const clearCompleted = event => {
         event.preventDefault()
         dispatch({ type: 'CLEAR_TODOS'})
@@ -34,15 +30,15 @@ const TodoList = () => {
             {state.map(item => (
                     <div
                         className={`todo${item.completed ? ' completed' : ''}`}
-                        onClick={toggleCompleted}
+                        onClick={() => dispatch({ type: 'TOGGLE_COMPLETED', payload: item.id })}
                     >
-                        <p>{item.task}</p>
+                        <p>{item.item}</p>
                     </div>
             ))}
             <form onSubmit={handleSubmit}>
                 <input 
                     type='text' 
-                    name='task' 
+                    name='item' 
                     value={newTodoText} 
                     onChange={handleChanges}
                 />

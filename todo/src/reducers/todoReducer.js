@@ -1,37 +1,28 @@
 export const initialState = [
     {
-        task: 'Learn about reducers',
+        item: 'Learn about reducers',
         completed: false,
         id: Date.now()
     },
 ]
 
-export const reducer = (state, action) => {
+export const reducer = (state = initialState, action) => {
     switch (action.type) {  
         case 'TOGGLE_COMPLETED':
-            return state.map(task => {
-                if(task.completed === false) {
-                    return{
-                        ...task,
-                        completed: !task.completed
+            return state.map(item => {
+                if (item.id === action.payload) {
+                    return {
+                      ...item,
+                      completed: !item.completed
                     }
-                } if(task.completed === true){
-                    return{
-                        ...task,
-                        completed: !task.completed
-                    }
-                
-                } else {
-                    return task;
-                }
+                  }
+                  return item;
             })
-            // return [...state, {
-            //     completed: !state.completed
-            // }]
+
             
         case 'ADD_TODOS':
             return [...state, {
-               task: action.payload,
+               item: action.payload,
                completed: false,
                id: new Date()
             },]
