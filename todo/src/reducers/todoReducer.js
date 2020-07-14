@@ -1,24 +1,21 @@
+import {v4 as uuid} from 'uuid'
 export const initialState = [
     {
-        task: 'Replace alternator in Camry',
+        task: 'Learn about reducers',
         completed: false,
-        id: 1528817077286
+        id: new Date()
     },
-    {
-        task: 'Install new suspension in 4runner',
-        completed: false,
-        id: 1528817084358
-    },
-    {
-        task: 'CHILL THE EFF OUT',
-        completed: false,
-        id: 1528817084462
-    }
 ]
 
 export const reducer = (state, action) => {
-   switch (action.type) {
+    switch (action.type) {  
+       case 'ADD_TODOS':
+           return [...initialState, {
+               task: action.payload,
+               completed: false,
+               id: new Date()
+           }]
         default: 
            return state
-   }
+    }
 }

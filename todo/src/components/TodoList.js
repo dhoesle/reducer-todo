@@ -4,7 +4,15 @@ import Todo from './Todo'
 
 const TodoList = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
+    const [newTodoText, setNewTodoText] = useState('')
     console.log(state);
+    const handleSubmit = event => {
+        event.preventDefault();
+    }
+
+    const handleChanges = event => {
+        setNewTodoText(event.target.value)
+    }
 
     return (
         <div className='todo-list'>
@@ -15,9 +23,20 @@ const TodoList = () => {
                     toggleTodo={state.toggleTodo}
                 />
             ))}
-            <button className='clear-button' onClick={state.clearPurchased}>
-                Clear Completed Tasks
-            </button>
+            <form onSubmit={handleSubmit}>
+                <input 
+                    type='text' 
+                    name='item' 
+                    value={newTodoText} 
+                    onChange={handleChanges}
+                />
+                <button  
+                    onClick={() => dispatch({ type: 'ADD_TODOS', payload: newTodoText})}
+                >
+                    Add to List
+                </button>
+
+            </form>
             
             
         </div>
