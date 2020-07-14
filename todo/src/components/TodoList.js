@@ -19,7 +19,7 @@ const TodoList = () => {
         dispatch({ type: 'ADD_TODOS', payload: newTodoText})
     }
 
-    const toggleCompleted = taskId => {
+    const toggleCompleted = (taskId) => {
         dispatch({ type: 'TOGGLE_COMPLETED', payload: taskId })
     }
 
@@ -57,7 +57,7 @@ const TodoList = () => {
             <button
                 onClick={clearCompleted}
             >
-                Clean up list
+                Clean up List
             </button>
             
             

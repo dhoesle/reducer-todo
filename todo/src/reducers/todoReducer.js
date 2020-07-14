@@ -2,7 +2,7 @@ export const initialState = [
     {
         task: 'Learn about reducers',
         completed: false,
-        id: new Date()
+        id: Date.now()
     },
 ]
 
@@ -10,12 +10,18 @@ export const reducer = (state, action) => {
     switch (action.type) {  
         case 'TOGGLE_COMPLETED':
             return state.map(task => {
-                if(task.id === action.payload) {
+                if(task.completed === false) {
                     return{
                         ...task,
                         completed: !task.completed
                     }
-                }else {
+                } if(task.completed === true){
+                    return{
+                        ...task,
+                        completed: !task.completed
+                    }
+                
+                } else {
                     return task;
                 }
             })
