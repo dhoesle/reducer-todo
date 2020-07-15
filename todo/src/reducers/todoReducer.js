@@ -17,9 +17,7 @@ export const reducer = (state = initialState, action) => {
                     }
                   }
                   return item;
-            })
-
-            
+            })  
         case 'ADD_TODOS':
             return [...state, {
                item: action.payload,
