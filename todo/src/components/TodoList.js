@@ -4,10 +4,8 @@ import { initialState, reducer } from '../reducers/todoReducer'
 const TodoList = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
     const [newTodoText, setNewTodoText] = useState('')
-    console.log(state);
-    const handleSubmit = event => {
-        event.preventDefault();
-    }
+    console.log("TodoList -> state", state)
+ 
 
     const handleChanges = event => {
         event.preventDefault();
@@ -17,6 +15,8 @@ const TodoList = () => {
     const addTodo = event  => {
         event.preventDefault()
         dispatch({ type: 'ADD_TODOS', payload: newTodoText})
+        console.log("TodoList -> newTodoText", newTodoText)
+        setNewTodoText('')
     }
 
     const clearCompleted = event => {
@@ -27,7 +27,31 @@ const TodoList = () => {
 
     return (
         <div className='todo-list'>
-            {state.map(item => (
+            <form onSubmit={addTodo}>
+                <input 
+                    type='text' 
+                    name='item' 
+                    value={newTodoText} 
+                    onChange={handleChanges}
+                    placeholder='add a task here'
+                />
+                <label>Urgent
+                        <input
+                            name='stress'
+                            type='checkbox'
+                            // onChange={onCheckboxChange}
+                            // checked={values.medical.stress}
+                            
+                        />
+                    </label>
+                <button
+                    className='add-button'  
+                >
+                    Add to List
+                </button>
+
+            </form>
+            {state.todos.map(item => (
                     <div
                         className={`todo${item.completed ? ' completed' : ''}`}
                         onClick={() => dispatch({ type: 'TOGGLE_COMPLETED', payload: item.id })}
@@ -35,25 +59,12 @@ const TodoList = () => {
                         <p>{item.item}</p>
                     </div>
             ))}
-            <form onSubmit={handleSubmit}>
-                <input 
-                    type='text' 
-                    name='item' 
-                    value={newTodoText} 
-                    onChange={handleChanges}
-                />
-                <button  
-                    onClick={addTodo}
-                >
-                    Add to List
-                </button>
-
-            </form>
 
             <button
+                className='clear-button'
                 onClick={clearCompleted}
             >
-                Clean up List
+               Clear Completed Tasks
             </button>
             
             
